@@ -11,3 +11,28 @@ view{
 .index-swiper  image{
     width: 100%;
 }
+.cateList{
+    display: flex;
+}
+.cateList navigator{
+    padding: 25rpx;
+    flex: 1;
+}
+.cateList image{
+    width: 100%;
+}
+
+.floorList-content{
+    display: flex;
+}
+.floorList-content view{
+    flex:1;
+    border: white solid 4rpx;
+}
+.floorList-content image{
+    width: 100%;
+}
+
+.floorList-title{
+    margin-top: 20rpx;
+}

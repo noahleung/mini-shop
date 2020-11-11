@@ -1,3 +1,4 @@
 {
-  "usingComponents": {}
+  "usingComponents": {"SearchInput": "../../components/search-input/search-input"},
+  "navigationBarTitleText": "分页"
 }

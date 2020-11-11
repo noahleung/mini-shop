@@ -1,66 +1,34 @@
 // pages/category/category.js
+import {request} from "../../request/index.js"
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    leftMenuList: [],
+    rightContent: []
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getCates();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  getCates(){
+    request({url:"https://api-hmugo-web.itheima.net/api/public/v1/categories"})
+    .then(res=>{
+      let cates = res.data.message;
+      //构造左侧
+      let leftMenuList = cates.map(item=>item.cat_name);
+      // 构造右侧
+      let rightContent = cates[0].children
+      this.setData({
+        leftMenuList,
+        rightContent
+      })
+    })
   }
+
+
 })

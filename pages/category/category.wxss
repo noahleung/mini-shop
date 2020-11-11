@@ -1,1 +1,19 @@
 /* pages/category/category.wxss */
+.bottom{
+    display: flex;
+    height: calc( 100vh - 90rpx );
+}
+.left{
+    flex: 2;
+}
+.right{
+    flex: 5;
+}
+.menu-item{
+    height: 80rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30rpx;
+    /* margin-top: 10rpx; */
+}

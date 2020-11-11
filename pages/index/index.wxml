@@ -1,11 +1,47 @@
 <view>
     <SearchInput></SearchInput>
-
     <swiper class="index-swiper" autoplay="{{true}}" interval="5000" indicator-dots="{{true}}">
         <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
-            <navigator >
-                <image mode="widthFix"src="{{item.image_src}}"/>
+            <navigator>
+                <image mode="widthFix" src="{{item.image_src}}" />
             </navigator>
         </swiper-item>
     </swiper>
+    <!-- 导航栏 -->
+    <view class="cateList">
+        <navigator wx:for="{{cateList}}" wx:key="name">
+            <image mode="widthFix" src="{{item.image_src}}" />
+        </navigator>
+    </view>
+    <!-- 楼层 -->
+    <view wx:for="{{floorList}}" wx:for-index="index" wx:for-item="item">
+        <view class="floorList-title">
+            <image mode="widthFix" src="{{item.floor_title.image_src}}" />
+        </view>
+        <view class="floorList-content">
+            <view>
+                <navigator url="{{item.product_list[0].navigator_url}}">
+                    <image mode="widthFix" src="{{item.product_list[0].image_src}}" />
+                </navigator>
+            </view>
+            <view>
+                <navigator url="{{item.product_list[1].navigator_url}}">
+                    <image mode="widthFix" src="{{item.product_list[1].image_src}}"></image>
+                </navigator>
+
+                <navigator url="{{item.product_list[2].navigator_url}}">
+                    <image mode="widthFix" src="{{item.product_list[2].image_src}}"></image>
+                </navigator>
+            </view>
+            <view>
+                <navigator url="{{item.product_list[3].navigator_url}}">
+                    <image mode="widthFix" src="{{item.product_list[3].image_src}}"></image>
+                </navigator>
+
+                <navigator url="{{item.product_list[4].navigator_url}}">
+                    <image mode="widthFix" src="{{item.product_list[4].image_src}}"></image>
+                </navigator>
+            </view>
+        </view>
+    </view>
 </view>
