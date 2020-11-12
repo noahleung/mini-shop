@@ -17,3 +17,28 @@
     font-size: 30rpx;
     /* margin-top: 10rpx; */
 }
+.left .active{
+    color: var(--themeColor);
+    border-left: 5rpx solid currentColor;
+}
+.goods-list navigator{
+    width: 33.33%;
+    text-align: center;
+}
+.goods-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.delimiter{
+    color: #cccccc;
+    padding: 0 10rpx;
+}
+.goods-title{
+    height: 80rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.goods-list image{
+    width: 50%;
+}

@@ -1,9 +1,24 @@
 <SearchInput></SearchInput>
 <view class="bottom">
     <scroll-view class="left" scroll-y="{{true}}">
-        <view wx:for="{{leftMenuList}}" wx:for-item="item" class="menu-item">
+        <view wx:for="{{leftMenuList}}" wx:for-item="item" wx:for-index="index"  bindtap="handleItemTap" data-index="{{index}}" class="menu-item {{index===currentIndex?'active':''}}">
             {{item}}
         </view>
     </scroll-view>
-    <scroll-view class="right" scroll-y="{{true}}"></scroll-view>
+    <scroll-view class="right" scroll-y="{{true}}" scroll-top="{{scrollTop}}">
+        <view class="goods-group" wx:for="{{rightContent}}" wx:for-item="item1" wx:for-index="index1">
+            <view class="goods-title">
+                <view class="delimiter">/</view>
+                <view class="title">{{item1.cat_name}}</view>
+                <view class="delimiter">/</view>
+            </view>
+            <view class="goods-list">
+                <navigator wx:for="{{item1.children}}" wx:for-item="childrenItem" wx:for-index="childrenIndex" wx:key="cat_id"
+                url="/pages/goods_list/goods_list?cid={{childrenItem.cat_id}}">
+                    <image mode="widthFix" src="{{childrenItem.cat_icon}}" />
+                    <view class="goods_name">{{childrenItem.cat_name}}</view>
+                </navigator>
+            </view>
+        </view>
+    </scroll-view>
 </view>
