@@ -70,5 +70,18 @@ Page({
     this.setData({
       goodsList: [...this.data.goodsList,...res.goods]
     })
+  },
+  onPullDownRefresh() {
+    this.queryParam = {
+      query: '',
+      cid: this.queryParam.cid,
+      pagenum: 1,
+      pagesize: 10
+    }
+    this.totalPages = 1
+    this.setData({
+      goodsList: []
+    })
+    this.getGoodsList()
   }
 })

@@ -1,5 +1,5 @@
 /* 微信小程序不支持通配符星号(*)  */
-
+@import "./styles/iconfont.wxss" ;
 page,view,text,swiper,swiper-item,image,navigator{
     padding: 0;
     margin: 0;
@@ -15,4 +15,10 @@ page{
 }
 image{
     width: 100%;
+}
+.shenglue{
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
