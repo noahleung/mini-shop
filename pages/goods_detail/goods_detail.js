@@ -36,5 +36,16 @@ Page({
       current: e.currentTarget.dataset.current,
       urls: list
     });
+  },
+  handleCartAdd(){
+    let cart = wx.getStorageSync("cart")||[];
+    let index = cart.findIndex(v=>v.goods_id===this.data.goods_id);
+    if (index === -1){
+        //不存在
+     let goodsInfo = {...this.data.goodsObj,num: 1}
+    }else{
+
+    }
+    wx.setStorageSync('cart', data)
   }
 })
