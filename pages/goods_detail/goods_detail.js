@@ -6,9 +6,9 @@ Page({
   data: {
     goods_id: '',
     swiperList: [],
-    goodsObj: {}
+    goodsObj: {},
   },
-
+  goodsInfo: {},
   onLoad: function (options) {
     this.setData({ 
       goods_id : options.goods_id
@@ -25,6 +25,11 @@ Page({
         goods_introduce: res.goods_introduce.replace(/\.webp/g,'.jpg')
       }
     })
+    this.goodsInfo = {
+      goods_name: res.goods_name,
+      goods_price: res.goods_price,
+      goods_id: this.data.goods_id
+    }
     console.log(this.data.goodsObj)
   },
   handlePreviewImage(e){
@@ -38,14 +43,38 @@ Page({
     });
   },
   handleCartAdd(){
-    let cart = wx.getStorageSync("cart")||[];
-    let index = cart.findIndex(v=>v.goods_id===this.data.goods_id);
-    if (index === -1){
-        //不存在
-     let goodsInfo = {...this.data.goodsObj,num: 1}
-    }else{
-
+    let cart = wx.getStorageSync("cart");
+    if (!cart){
+      cart = [];
     }
-    wx.setStorageSync('cart', data)
+    let selectedIndex = -1;
+    let goodsInfo={};
+
+    cart.forEach((item,index) => {
+      if (item.goods_id === this.data.goods_id){
+        selectedIndex = index;
+        goodsInfo = item;
+      }
+    });
+
+    if (selectedIndex === -1){
+      //不存在，新建一个入数组里
+      goodsInfo = {...this.goodsInfo,num: 1}
+      cart.push(goodsInfo)
+      wx.showToast({
+        title: '添加购物车成功',
+        icon: 'success',
+        duration: 2000
+      })
+    }else{
+     //存在，则num+1
+     cart[selectedIndex].num+=1
+     wx.showToast({
+      title: '物品数量+1',
+      icon: 'success',
+      duration: 2000
+    })
+    }
+    wx.setStorageSync('cart', cart)
   }
 })
