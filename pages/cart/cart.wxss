@@ -15,10 +15,6 @@ pahe{
     text-align: right;
 }
 
-.cart_content{
-
-}
-
 .cart_title{
     padding: 20rpx;
     font-size: 36rpx;
@@ -26,9 +22,7 @@ pahe{
     border-top: 1rpx solid currentColor;
     border-bottom: 1rpx solid currentColor;
 }
-.cart_main{
 
-}
 .cart_item{
     display: flex;
     padding: 10rpx;
