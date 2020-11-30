@@ -18,7 +18,7 @@ Page({
   async getGoodsDetail(goodsId) {
     const res =await request({url: '/goods/detail', data: {goods_id: goodsId}})
     this.setData({
-      swiperList: res.pics,
+      swiperList: res.pics.length != 0?res.pics:[{pics_mid:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605178727695&di=9fbe24c6d3d4f19b4a6393fb3747def7&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F16%2F08%2F26%2F1957c0226aaca58.jpg%2521%2Ffwfh%2F804x1005%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue'}],
       goodsObj: {
         goods_name: res.goods_name,
         goods_price: res.goods_price,
@@ -33,7 +33,6 @@ Page({
     console.log(this.data.goodsObj)
   },
   handlePreviewImage(e){
-    console.log(e)
     let list = this.data.swiperList.map((item)=>{
       return item.pics_mid
     })
@@ -59,7 +58,8 @@ Page({
 
     if (selectedIndex === -1){
       //不存在，新建一个入数组里
-      goodsInfo = {...this.goodsInfo,num: 1}
+      goodsInfo = {...this.goodsInfo,num: 1,
+        pics: this.data.swiperList[0].pics_mid,checked: true}
       cart.push(goodsInfo)
       wx.showToast({
         title: '添加购物车成功',

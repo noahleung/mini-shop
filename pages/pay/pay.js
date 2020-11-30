@@ -1,11 +1,16 @@
-// pages/pay/pay.js
+// pages/cart/cart.js
+import { showModel } from '../../utils/utils.js'
+import regeneratorRuntime from "../../lib/runtime/runtime.js"
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    address: {},
+    cart: [],
+    totalNum: 0,
+    totalPrice: 0
   },
 
   /**
@@ -14,53 +19,32 @@ Page({
   onLoad: function (options) {
 
   },
+  onShow() {
+    let address = wx.getStorageSync("address") || {};
+    let cart = wx.getStorageSync("cart") || [];
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+    address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo
+    cart = cart.filter(v=>v.checked)
+
+    let totalNum = 0, totalPrice = 0;
+    //计算全选
+    cart.forEach((item, index) => {
+        totalPrice = totalPrice + (item.goods_price * item.num)
+        totalNum = totalNum + item.num
+    });
+
+    this.setData({
+      address,
+      cart,
+      totalPrice,
+      totalNum
+    })
+  },
+  //计算数量 金额 判断是否全选
+  recount() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  pay() {
 
   }
 })
