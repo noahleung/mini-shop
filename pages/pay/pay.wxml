@@ -43,6 +43,6 @@
         </view>
     </view>
     <view class="order_pay_wrap" bindtap="pay">
-        结算({{totalNum}})
+        支付({{totalNum}})
     </view>
 </view>
