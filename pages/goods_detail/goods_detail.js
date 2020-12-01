@@ -7,13 +7,19 @@ Page({
     goods_id: '',
     swiperList: [],
     goodsObj: {},
+    isCollect: false
   },
   goodsInfo: {},
-  onLoad: function (options) {
+  onShow: function () {
+    let pages =  getCurrentPages();
+    let currentPage = pages[pages.length-1]
+    let options = currentPage.options
     this.setData({ 
       goods_id : options.goods_id
     })
     this.getGoodsDetail(this.data.goods_id)
+
+   
   },
   async getGoodsDetail(goodsId) {
     const res =await request({url: '/goods/detail', data: {goods_id: goodsId}})
@@ -30,7 +36,15 @@ Page({
       goods_price: res.goods_price,
       goods_id: this.data.goods_id
     }
-    console.log(this.data.goodsObj)
+
+     //获取缓存中是否被收藏
+     let collect = wx.getStorageSync("collect")||[];
+     //判断当前商品是否被收藏
+     let isCollect = collect.some(v=>v.goods_id = this.data.goods_id)
+
+     this.setData({
+       isCollect
+     })
   },
   handlePreviewImage(e){
     let list = this.data.swiperList.map((item)=>{
@@ -76,5 +90,38 @@ Page({
     })
     }
     wx.setStorageSync('cart', cart)
-  }
+  },
+  handleCollect () {
+    let isCollect = false
+    let collect = wx.getStorageSync("collect")||[];
+
+    let index = collect.findIndex(v=>v.goods_id = this.data.goods_id)
+
+    if (index != -1){
+      collect.splice(index,1)
+      isCollect = false
+      wx.showToast({
+        title: '取消收藏成功',
+        icon: 'success',
+        duration: 1500,
+        mask: true
+      });
+      //有
+    }else{
+      //无
+      collect.push({...this.goodsInfo,pics: this.data.swiperList[0].pics_mid})
+      isCollect = true
+      wx.showToast({
+        title: '收藏成功',
+        icon: 'success',
+        duration: 1500,
+        mask: true
+      });
+    }
+
+    this.setData({
+      isCollect
+    })
+    wx.setStorageSync("collect", collect);
+    }
 })

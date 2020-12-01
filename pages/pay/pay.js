@@ -19,7 +19,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
   onShow() {
     let address = wx.getStorageSync("address") || {};
@@ -80,13 +79,13 @@ Page({
       let order_number = res.order_number
 
       //获取发起支付所需要的参数
-      const res2 = await request({ url: '/my/orders/req_unifiedorder', method: 'POST', header, data: { order_number } })
+      const res2 = await request({ url: '/my/orders/req_unifiedorder', method: 'POST', data: { order_number } })
 
       // 发起支付
       const res3 = await pay(res2.pay)
 
       //查询订单
-      const res4 = await request({ url: '/my/orders/chkOrder', method: 'POST', header, data: { order_number } })
+      const res4 = await request({ url: '/my/orders/chkOrder', method: 'POST', data: { order_number } })
 
       //支付成功从购物车中删除已完成支付的商品
 
@@ -95,13 +94,8 @@ Page({
 
     } finally{
       let realCart = wx.getStorageSync("cart")||[];
-      realCart.filter((item)=>{
-        if (!item.checked){
-          //留下未被选中的
-          return true;
-        }
-      })
-      console.log(realCart)
+      realCart = realCart.filter(v=>!v.checked)
+     
       wx.setStorageSync("cart", realCart);
 
       wx.switchTab({
