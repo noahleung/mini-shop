@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "SearchInput": "../../components/search-input/search-input",
+    "Tabs": "../../components/tabs/tabs"
+  },
   "navigationBarTitleText": "收藏夹"
 }
