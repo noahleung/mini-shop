@@ -3,7 +3,9 @@ import regeneratorRuntime from "../../lib/runtime/runtime.js"
 Page({
 
   data: {
-    goods: []
+    goods: [],
+    isFocus: false,
+    inputValue: ''
   },
   time: -1,
 
@@ -17,8 +19,16 @@ Page({
     let {value} = e.detail;
 
     if (!value.trim()) {
+      this.setData({
+        isFocus: false,
+        goods: []
+      })
       return ;
     }
+    this.setData({
+      isFocus: true,
+      goods: []
+    })
     //防抖
     clearTimeout(this.time)
     this.time = setTimeout(() => {
@@ -29,6 +39,13 @@ Page({
     const res = await request({url: '/goods/qsearch',data: {query}})
     this.setData({
       goods: res
+    })
+  },
+  handleClickButton(){
+    this.setData({
+      isFocus: false,
+      goods: [],
+      inputValue: ''
     })
   }
 

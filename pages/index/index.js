@@ -42,5 +42,12 @@ Page({
         floorList: result
       })
     })
+  },
+  toNavigate(e){
+    let {query} = e.currentTarget.dataset
+    query = query.split("?")[1]
+    wx.navigateTo({
+      url: '/pages/goods_list/goods_list?'+query
+    });
   }
 })

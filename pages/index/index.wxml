@@ -1,15 +1,15 @@
 <view>
     <SearchInput></SearchInput>
     <swiper class="index-swiper" autoplay="{{true}}" interval="5000" indicator-dots="{{true}}">
-        <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
-            <navigator>
-                <image mode="widthFix" src="{{item.image_src}}" />
+        <swiper-item wx:for="{{swiperList}}" wx:key="goods_id" wx:for-item="swiperItem">
+            <navigator url="/pages/goods_detail/goods_detail?goods_id={{swiperItem.goods_id}}">
+                <image mode="widthFix" src="{{swiperItem.image_src}}" />
             </navigator>
         </swiper-item>
     </swiper>
     <!-- 导航栏 -->
     <view class="cateList">
-        <navigator wx:for="{{cateList}}" wx:key="name">
+        <navigator wx:for="{{cateList}}" wx:key="name" url="/pages/category/category" open-type="switchTab">
             <image mode="widthFix" src="{{item.image_src}}" />
         </navigator>
     </view>
@@ -20,27 +20,27 @@
         </view>
         <view class="floorList-content">
             <view>
-                <navigator url="{{item.product_list[0].navigator_url}}">
+                <view bindtap="toNavigate" data-query="{{item.product_list[0].navigator_url}}">
                     <image mode="widthFix" src="{{item.product_list[0].image_src}}" />
-                </navigator>
+                </view>
             </view>
             <view>
-                <navigator url="{{item.product_list[1].navigator_url}}">
+                <view bindtap="toNavigate" data-query="{{item.product_list[1].navigator_url}}">
                     <image mode="widthFix" src="{{item.product_list[1].image_src}}"></image>
-                </navigator>
+                </view>
 
-                <navigator url="{{item.product_list[2].navigator_url}}">
+                <view bindtap="toNavigate" data-query="{{item.product_list[2].navigator_url}}">
                     <image mode="widthFix" src="{{item.product_list[2].image_src}}"></image>
-                </navigator>
+                </view>
             </view>
             <view>
-                <navigator url="{{item.product_list[3].navigator_url}}">
+                <view bindtap="toNavigate" data-query="{{item.product_list[3].navigator_url}}">
                     <image mode="widthFix" src="{{item.product_list[3].image_src}}"></image>
-                </navigator>
+                </view>
 
-                <navigator url="{{item.product_list[4].navigator_url}}">
+                <view bindtap="toNavigate" data-query="{{item.product_list[4].navigator_url}}">
                     <image mode="widthFix" src="{{item.product_list[4].image_src}}"></image>
-                </navigator>
+                </view>
             </view>
         </view>
     </view>
